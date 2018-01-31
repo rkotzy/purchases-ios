@@ -17,14 +17,16 @@ For option two, if users can make a purchase without having an account, you will
 
 ## Purchases Without Accounts
 
-For apps where subscriptions can be purchased outside of a logged in account, you need to provide your users a way to restore purchases directly. You should add a button to your purchase flow or your settings to allow users to trigger this.
+For apps where subscriptions can be purchased outside of a logged in account, you need to provide your users a way to restore purchases directly. The `appUserID` should be a randomly generated ID (`NSUUID` works nicely for this) and persisted to `NSUserDefaults`. However, since the user will have different `appUserIDs` on their different devices you need a way to associated different random `appUserID`s.
+
+To do this you should add a button to your purchase flow or your settings to allow users to trigger a purchase restore.
 
 To restore purchases with RevenueCat, you should call the follow:
 ```
 self.purchases.restoreTransactionsForAppStoreAccount();
 ```
 
-Any other users using the current App Store account for their subscriptions will lose their subscriptions. This is the desired behavior to keep users from sharing App Store accounts to share subscriptions.
+This will refresh the StoreKit receipt file and send it to RevenueCat for processing. If there is another RevenueCat user found to have used the same receipt, the restoring user will be linked to the existing user and they will be treated as one subscriber. This only needs to be done once. Going forward the restoring user's purchase state will be tracked automatically.
 
 Make sure you also implement the restoration related optional delegate methods:
 
