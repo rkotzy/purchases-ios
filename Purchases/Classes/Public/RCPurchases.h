@@ -47,7 +47,7 @@ typedef NS_ENUM(NSInteger, RCAttributionNetwork) {
 
  @return An instantiated `RCPurchases` object
  */
-- (instancetype _Nullable)initWithAPIKey:(NSString *)APIKey;
+- (instancetype)initWithAPIKey:(NSString *)APIKey;
 
 /**
  Initializes an `RCPurchases` object with specified API key and app user ID.
@@ -62,8 +62,8 @@ typedef NS_ENUM(NSInteger, RCAttributionNetwork) {
 
  @return An instantiated `RCPurchases` object
  */
-- (instancetype _Nullable)initWithAPIKey:(NSString *)APIKey
-                               appUserID:(NSString * _Nullable)appUserID;
+- (instancetype)initWithAPIKey:(NSString *)APIKey
+                     appUserID:(NSString * _Nullable)appUserID;
 
 /**
  Initializes an `RCPurchases` object with a custom userDefaults. Use this constructor if you want to sync status across
@@ -76,9 +76,9 @@ typedef NS_ENUM(NSInteger, RCAttributionNetwork) {
  @return An instantiated `RCPurchases` object
  */
 
-- (instancetype _Nullable)initWithAPIKey:(NSString *)APIKey
-                               appUserID:(NSString * _Nullable)appUserID
-                            userDefaults:(NSUserDefaults * _Nullable)userDefaults;
+- (instancetype)initWithAPIKey:(NSString *)APIKey
+                     appUserID:(NSString * _Nullable)appUserID
+                  userDefaults:(NSUserDefaults * _Nullable)userDefaults;
 
 /// The `appUserID` used by `RCPurchases`. If not passed on initialization this will be generated and cached by `RCPurchases`.
 @property (nonatomic, readonly) NSString *appUserID;
@@ -191,7 +191,7 @@ typedef NS_ENUM(NSInteger, RCAttributionNetwork) {
 
  @note Delegate methods can be called at any time after the `delegate` is set, not just in response to `makePurchase:` calls. Ensure your app is capable of handling completed transactions anytime `delegate` is set.
  */
-@protocol RCPurchasesDelegate
+@protocol RCPurchasesDelegate <NSObject>
 @required
 
 /**

@@ -41,19 +41,19 @@ NSString * RCPurchaserInfoAppUserDefaultsKeyBase = @"com.revenuecat.userdefaults
 
 @implementation RCPurchases
 
-- (instancetype _Nullable)initWithAPIKey:(NSString *)APIKey
+- (instancetype)initWithAPIKey:(NSString *)APIKey
 {
     return [self initWithAPIKey:APIKey appUserID:nil];
 }
 
-- (instancetype _Nullable)initWithAPIKey:(NSString *)APIKey appUserID:(NSString * _Nullable)appUserID
+- (instancetype)initWithAPIKey:(NSString *)APIKey appUserID:(NSString * _Nullable)appUserID
 {
     return [self initWithAPIKey:APIKey appUserID:appUserID userDefaults:nil];
 }
 
-- (instancetype _Nullable)initWithAPIKey:(NSString *)APIKey
-                               appUserID:(NSString * _Nullable)appUserID
-                            userDefaults:(NSUserDefaults * _Nullable)userDefaults
+- (instancetype)initWithAPIKey:(NSString *)APIKey
+                     appUserID:(NSString * _Nullable)appUserID
+                  userDefaults:(NSUserDefaults * _Nullable)userDefaults
 {
     RCStoreKitRequestFetcher *fetcher = [[RCStoreKitRequestFetcher alloc] init];
     RCBackend *backend = [[RCBackend alloc] initWithAPIKey:APIKey];
@@ -75,12 +75,12 @@ NSString * RCPurchaserInfoAppUserDefaultsKeyBase = @"com.revenuecat.userdefaults
     return @"1.2.0-SNAPSHOT";
 }
 
-- (instancetype _Nullable)initWithAppUserID:(NSString *)appUserID
-                             requestFetcher:(RCStoreKitRequestFetcher *)requestFetcher
-                                    backend:(RCBackend *)backend
-                            storeKitWrapper:(RCStoreKitWrapper *)storeKitWrapper
-                         notificationCenter:(NSNotificationCenter *)notificationCenter
-                               userDefaults:(NSUserDefaults *)userDefaults
+- (instancetype)initWithAppUserID:(NSString *)appUserID
+                   requestFetcher:(RCStoreKitRequestFetcher *)requestFetcher
+                          backend:(RCBackend *)backend
+                  storeKitWrapper:(RCStoreKitWrapper *)storeKitWrapper
+               notificationCenter:(NSNotificationCenter *)notificationCenter
+                     userDefaults:(NSUserDefaults *)userDefaults
 {
     if (self = [super init]) {
 
@@ -387,7 +387,7 @@ NSString * RCPurchaserInfoAppUserDefaultsKeyBase = @"com.revenuecat.userdefaults
         self.productsByIdentifier[product.productIdentifier] = product;
     }
     
-    if ([(id<NSObject>)self.delegate respondsToSelector:@selector(purchases:shouldPurchasePromoProduct:defermentBlock:)]) {
+    if ([self.delegate respondsToSelector:@selector(purchases:shouldPurchasePromoProduct:defermentBlock:)]) {
         return [self.delegate purchases:self shouldPurchasePromoProduct:product defermentBlock:^{
             [self.storeKitWrapper addPayment:payment];
         }];
